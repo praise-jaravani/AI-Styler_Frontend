@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 
+// Definition of interface for MenuItemProps object
+// Each menu item will contain a link, and a name for the navbar element
 interface MenuItemProps {
   href: string;
   text: string;
 }
 
 const Navbar: React.FC = () => {
+  // Initialised state for mobile menu
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Created a function to handle state for mobile menu upon click
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(prevState => !prevState);
   };
 
+  // Defining the menuItemprops array that stores object of the type MenuItemProps from the above interface
   const menuItems: MenuItemProps[] = [
     { href: '/home', text: 'Home' },
     { href: '/about-us', text: 'About Us' },
@@ -19,12 +24,17 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="bg-white shadow-lg">
+
       <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4 relative">
+
+        {/*Name and Logo*/}
         <a href="/home" className="flex items-center">
           <span className="self-center text-2xl font-semibold text-gray-800">
             AI Styler
           </span>
         </a>
+
+        {/*Mobile Menu Button that's toggled on click*/}
         <div className="md:hidden">
           <div className="relative inline-block text-left">
             <button
@@ -63,6 +73,8 @@ const Navbar: React.FC = () => {
                 />
               </svg>
             </button>
+
+            {/*Mobile Menu Drop Down*/}
             <div
               className={`${
                 isMobileMenuOpen ? 'block' : 'hidden'
@@ -84,7 +96,9 @@ const Navbar: React.FC = () => {
             </div>
           </div>
         </div>
-        <ul className="hidden md:flex space-x-4"> {/* Regular Navbar */}
+
+        {/* Regular Navbar */}
+        <ul className="hidden md:flex space-x-4"> 
           {menuItems.map((item, index) => (
             <li key={index}>
               <a
@@ -96,7 +110,9 @@ const Navbar: React.FC = () => {
             </li>
           ))}
         </ul>
+
       </div>
+
     </nav>
   );
 };
