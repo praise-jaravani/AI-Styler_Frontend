@@ -1,8 +1,13 @@
-import React from 'react'
+import React from 'react';
+import Hero from "../components/Hero.tsx";
+import Cards from '../components/Cards.tsx';
 
 const AboutUs: React.FC = () => {
   return (
-    <div>AboutUs</div>
+    <div>
+    <Hero/>
+    <Cards/>
+    </div>
   )
 }
 

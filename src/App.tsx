@@ -5,6 +5,7 @@ import './App.css';
 import Navbar from './components/Navbar.tsx';
 import Home from './pages/Home.tsx';
 import AboutUs from './pages/AboutUs.tsx';
+import Footer from "./components/Footer.tsx";
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/about-us" element={<AboutUs />} />
       </Routes>
+      <Footer/>
     </Router>
     </>
   );
