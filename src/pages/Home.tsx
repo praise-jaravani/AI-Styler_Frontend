@@ -6,8 +6,8 @@ const Home: React.FC = () => {
   const [prompt, setPrompt] = useState<string>('');
   const [image, setImage] = useState<File | null>(null);
 
-  // Functions to handle 
-  // 
+  // Functions to handle updating state variables
+  // event listener of type React.ChangeEvent
   const handlePromptChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrompt(event.target.value);
   };
