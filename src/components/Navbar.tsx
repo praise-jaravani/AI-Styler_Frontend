@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
 
   // Defining the menuItemprops array that stores object of the type MenuItemProps from the above interface
   const menuItems: MenuItemProps[] = [
-    { href: '/home', text: 'Home' },
+    { href: '/', text: 'Home' },
     { href: '/about-us', text: 'About Us' },
   ];
 
