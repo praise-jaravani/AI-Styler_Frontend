@@ -23,7 +23,7 @@ Before you begin, make sure you have the following software installed on your sy
 
 2. Navigate to the project directory:
 
-  ```bash
+   ```bash
    cd AI-Styler
    ```
 3. Install the project dependencies:
