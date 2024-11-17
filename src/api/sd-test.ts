@@ -1,9 +1,16 @@
 import fetch from 'node-fetch';
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+
+// Load environment variables from .env file
+dotenv.config({
+    path: path.resolve(process.cwd(), '.env')
+});
 
 // Add your Hugging Face token here
-const HF_ACCESS_TOKEN = "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";
+const HF_ACCESS_TOKEN = process.env.HF_ACCESS_TOKEN;
 
 async function generateImage(prompt: string, maxRetries: number = 5, initialWait: number = 10): Promise<void> {
     try {
@@ -75,7 +82,7 @@ async function generateImage(prompt: string, maxRetries: number = 5, initialWait
 }
 
 // Test the function
-const testPrompt = "Astronaut in a jungle, cold color palette, muted colors, detailed, 8k";
+const testPrompt = "Astronaut in a space, cold color palette, muted colors, detailed, 8k";
 
 if (!HF_ACCESS_TOKEN) {
     console.log("Please add your HuggingFace access token to the script");
