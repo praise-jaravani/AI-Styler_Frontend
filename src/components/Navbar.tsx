@@ -1,118 +1,185 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 
-// Definition of interface for MenuItemProps object
-// Each menu item will contain a link, and a name for the navbar element
+
 interface MenuItemProps {
   href: string;
   text: string;
 }
 
 const Navbar: React.FC = () => {
-  // Initialised state for mobile menu
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Created a function to handle state for mobile menu upon click
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(prevState => !prevState);
   };
 
-  // Defining the menuItemprops array that stores object of the type MenuItemProps from the above interface
   const menuItems: MenuItemProps[] = [
     { href: '/', text: 'Home' },
     { href: '/about-us', text: 'About Us' },
+    { href: '/contact-us', text: 'Contact Us' },
   ];
 
   return (
-    <nav className="bg-white shadow-lg">
+    <nav className="bg-white shadow-lg relative">
+      <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
+        {/* Logo */}
+        <motion.a 
+          href="/"
+          className="flex items-center space-x-3" // Added space-x-3 for better spacing
+        >
+          <img 
+            src={`${process.env.PUBLIC_URL}/images/logo.jpg`}
+            alt="Ai Styler Logo" 
+            className="h-10 w-10 rounded-lg object-cover"
+          />
+          <motion.span 
+            className="self-center text-2xl font-bold text-gray-800"
+            whileHover={{ 
+              color: '#2563eb',
+              transition: { duration: 0.2 }
+            }}
+          >
+            Ai Styler
+          </motion.span>
+        </motion.a>
 
-      <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4 relative">
-
-        {/*Name and Logo*/}
-        <a href="/home" className="flex items-center">
-          <span className="self-center text-2xl font-semibold text-gray-800">
-            AI Styler
-          </span>
-        </a>
-
-        {/*Mobile Menu Button that's toggled on click*/}
+        {/* Mobile Menu Button */}
         <div className="md:hidden">
-          <div className="relative inline-block text-left">
-            <button
-              type="button"
-              className={`inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600`}
-              onClick={toggleMobileMenu}
-            >
-              <span className="sr-only">Open main menu</span>
-              <svg
-                className={`w-5 h-5 ${isMobileMenuOpen ? 'hidden' : 'block'}`}
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 17 14"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M1 1h15M1 7h15M1 13h15"
-                />
-              </svg>
-              <svg
-                className={`w-5 h-5 ${isMobileMenuOpen ? 'block' : 'hidden'}`}
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M1 10C1 9.44772 1.44772 9 2 9H18C18.5523 9 19 9.44772 19 10C19 10.5523 18.5523 11 18 11H2C1.44772 11 1 10.5523 1 10Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </button>
-
-            {/*Mobile Menu Drop Down*/}
-            <div
-              className={`${
-                isMobileMenuOpen ? 'block' : 'hidden'
-              } origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5`}
-            >
-              <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                {menuItems.map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.href}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-500"
-                    role="menuitem"
-                    onClick={toggleMobileMenu}
-                  >
-                    {item.text}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
+          <motion.button
+            type="button"
+            className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onClick={toggleMobileMenu}
+            whileHover={{ backgroundColor: '#f3f4f6' }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span className="sr-only">Open main menu</span>
+            <AnimatePresence mode="wait">
+              {isMobileMenuOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X className="w-6 h-6" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Menu className="w-6 h-6" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.button>
         </div>
 
-        {/* Regular Navbar */}
-        <ul className="hidden md:flex space-x-4"> 
+        {/* Mobile Menu Dropdown */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              className="absolute top-full right-4 mt-2 w-56 rounded-xl shadow-lg bg-white ring-1 ring-black ring-opacity-5 overflow-hidden md:hidden z-50"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="py-1" role="menu">
+                {menuItems.map((item, index) => (
+                  <motion.a
+                    key={index}
+                    href={item.href}
+                    className="block px-4 py-3 text-sm text-gray-700 transition-all duration-200"
+                    role="menuitem"
+                    onClick={toggleMobileMenu}
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ 
+                      backgroundColor: '#f8fafc',
+                      x: 4,
+                      color: '#2563eb'
+                    }}
+                  >
+                    {item.text}
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex space-x-8">
           {menuItems.map((item, index) => (
-            <li key={index}>
-              <a
-                href={item.href}
-                className="text-gray-600 hover:text-blue-500 transition-colors duration-300"
-              >
-                {item.text}
-              </a>
-            </li>
+            <motion.li 
+              key={index}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <motion.div className="relative">
+                <motion.a
+                  href={item.href}
+                  className="relative text-gray-600 font-medium py-2"
+                  whileHover="hover"
+                >
+                  {/* Text with hover effect */}
+                  <motion.span
+                    variants={{
+                      hover: {
+                        color: '#2563eb',
+                        y: -2,
+                        transition: { duration: 0.2 }
+                      }
+                    }}
+                    className="relative z-10 inline-block"
+                  >
+                    {item.text}
+                  </motion.span>
+                  
+                  {/* Animated underline */}
+                  <motion.span
+                    className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 rounded-full"
+                    variants={{
+                      hover: {
+                        scaleX: 1,
+                        transition: {
+                          type: "spring",
+                          stiffness: 400,
+                          damping: 10
+                        }
+                      }
+                    }}
+                    initial={{ scaleX: 0 }}
+                    style={{ originX: 0 }}
+                  />
+                  
+                  {/* Subtle background highlight */}
+                  <motion.span
+                    className="absolute inset-0 w-full h-full bg-blue-50 rounded-lg -z-10"
+                    variants={{
+                      hover: {
+                        opacity: 1,
+                        scale: 1.1,
+                        transition: { duration: 0.2 }
+                      }
+                    }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                  />
+                </motion.a>
+              </motion.div>
+            </motion.li>
           ))}
         </ul>
-
       </div>
-
     </nav>
   );
 };

@@ -2,11 +2,12 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import React from 'react';
 import './App.css';
-import Navbar from './components/Navbar.tsx';
-import Home from './pages/Home.tsx';
-import AboutUs from './pages/AboutUs.tsx';
-import Footer from "./components/Footer.tsx";
-import StyleOutput from "./pages/StyleOutput.tsx";
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import AboutUs from './pages/AboutUs';
+import Footer from "./components/Footer";
+import StyleOutput from "./pages/StyleOutput";
+import ContactUs from "./pages/ContactUs";
 
 const App: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/style-output" element={<StyleOutput/>} />
+        <Route path="/contact-us" element={<ContactUs/>} />
       </Routes>
       <Footer/>
     </Router>
