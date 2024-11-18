@@ -8,6 +8,7 @@ import AboutUs from './pages/AboutUs';
 import Footer from "./components/Footer";
 import StyleOutput from "./pages/StyleOutput";
 import ContactUs from "./pages/ContactUs";
+import StyleSelection from "./pages/StyleSelection";
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/style-output" element={<StyleOutput/>} />
         <Route path="/contact-us" element={<ContactUs/>} />
+        <Route path="/style-presets" element={<StyleSelection/>} />
       </Routes>
       <Footer/>
     </Router>

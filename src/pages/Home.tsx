@@ -240,13 +240,15 @@ const Home: React.FC = () => {
                     </motion.button>
 
                     <motion.button 
-                      className="group relative overflow-hidden px-8 py-4 rounded-full text-white border-2 border-white font-semibold text-lg transition-colors duration-300"
+                      className="group relative overflow-hidden px-8 py-4 rounded-full text-white border-2 border-white font-semibold text-lg transition-colors duration-300 hover:text-blue-600"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
                       <span className="relative z-10">Custom Style</span>
                       <motion.div
                         className="absolute inset-0 bg-white"
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 1 }}
                         transition={{ duration: 0.3 }}
                       />
                     </motion.button>
@@ -495,7 +497,7 @@ const Home: React.FC = () => {
               {[
                 {
                   title: "Smart Learning",
-                  description: "Our AI learns your preferences and improves recommendations over time",
+                  description: "Our AI learns your preferences and improves recommendations",
                   gradient: "from-blue-500 to-purple-500"
                 },
                 {

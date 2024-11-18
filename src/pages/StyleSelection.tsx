@@ -1,228 +1,440 @@
 import React from 'react';
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
+import { Wand2, Layers, Palette, Share2, ChevronRight } from 'lucide-react';
+import { StylePreset, Feature, StylePreview } from '../types/style';
 
-function StyleSelection() {
+// Sample data - in production, this would come from your data source
+const stylePresets: StylePreset[] = [
+  {
+    id: '1',
+    name: "Minimal Elegance",
+    description: "Clean lines and understated sophistication",
+    image: "/images/img-1.jpg",
+    baseStyle: "minimal",
+    colorScheme: ["neutral", "monochrome"],
+    occasion: ["work", "formal"],
+    season: "all",
+    moodKeywords: ["sophisticated", "clean", "modern"],
+    previewImages: ["/images/img-1.jpg", "/images/img-3.jpg"]
+  },
+  // Add more presets...
+];
+
+const features: Feature[] = [
+  {
+    icon: Wand2,
+    title: "AI-Powered Customization",
+    description: "Tailored style recommendations using advanced AI"
+  },
+  {
+    icon: Layers,
+    title: "Multiple Variations",
+    description: "Explore different options for your chosen style"
+  },
+  {
+    icon: Share2,
+    title: "Save & Share",
+    description: "Keep your favorite styles and share with friends"
+  }
+];
+
+const StyleSelection: React.FC = () => {
   return (
-    <main>
-      <div>StyleSelection</div>
-      {/* Call-to-action Section */}
-<section className="relative py-32 overflow-hidden">
-  {/* Animated Background */}
-  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500 opacity-90" />
-  
-  {/* Animated Particles Effect */}
-  <div className="absolute inset-0">
-    {[...Array(30)].map((_, i) => (
-      <motion.div
-        key={i}
-        className="absolute w-1 h-1 bg-white rounded-full"
-        style={{
-          left: `${Math.random() * 100}%`,
-          top: `${Math.random() * 100}%`,
-        }}
-        animate={{
-          scale: [1, 2, 1],
-          opacity: [0.3, 0.8, 0.3],
-          y: [0, -50, 0],
-        }}
-        transition={{
-          duration: Math.random() * 2 + 1,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-    ))}
-  </div>
-
-  {/* Content Container */}
-  <div className="container relative mx-auto px-4">
-    <div className="max-w-4xl mx-auto">
-      {/* Main Content */}
-      <div className="relative z-10 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-12"
-        >
-          {/* Decorative Lines */}
-          <div className="flex justify-center gap-2 mb-8">
-            {[...Array(3)].map((_, i) => (
-              <motion.div 
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+      {/* Hero Section with Particles */}
+        <section className="relative py-20 overflow-hidden">
+          {/* Gradient Background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 opacity-90" />
+          
+          {/* Particle Effect */}
+          <div className="absolute inset-0">
+            {[...Array(30)].map((_, i) => (
+              <motion.div
                 key={i}
-                className="h-1 bg-white rounded-full"
-                initial={{ width: 0 }}
-                whileInView={{ width: 20 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 * i, duration: 0.4 }}
+                className="absolute w-1 h-1 bg-white rounded-full"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  y: [0, -50, 0],
+                  opacity: [0.2, 0.5, 0.2],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: Math.random() * 2 + 2,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
               />
             ))}
           </div>
-          
-          <h2 className="text-6xl font-bold mb-6 leading-tight">
-            <span className="text-white">Start Creating</span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-100">
-              Your Perfect Style
-            </span>
-          </h2>
-          
-          <motion.p 
-            className="text-xl text-white/90 max-w-2xl mx-auto"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-          >
-            Transform your fashion vision into reality with our AI-powered style generator
-          </motion.p>
-        </motion.div>
 
-        {/* Buttons Container */}
-        <motion.div 
-          className="relative"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.6 }}
-        >
-          {/* Glass Cards Background */}
-          <div className="absolute inset-x-0 -top-10 -bottom-10 bg-white/5 backdrop-blur-lg rounded-3xl" />
+          {/* Content Container */}
+          <div className="container relative mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              {/* Main Content */}
+              <div className="relative z-10 text-center">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="mb-12"
+                >
+                  {/* Decorative Lines */}
+                  <div className="flex justify-center gap-2 mb-8">
+                    {[...Array(3)].map((_, i) => (
+                      <motion.div 
+                        key={i}
+                        className="h-1 bg-white rounded-full"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: 20 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 * i, duration: 0.4 }}
+                      />
+                    ))}
+                  </div>
+                  
+                  <h2 className="text-6xl font-bold mb-6 leading-tight">
+                    <motion.span 
+                      className="text-white block"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      Choose Your Perfect Style
+                    </motion.span>
+                  </h2>
+                  
+                  <motion.p 
+                    className="text-xl text-white/90 max-w-2xl mx-auto mb-1"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    Select from our collection of style presets to begin your fashion journey
+                  </motion.p>
+                </motion.div>
 
-          {/* Buttons */}
-          <div className="relative flex flex-col sm:flex-row justify-center gap-6 mb-8 p-6">
-            <motion.button 
-              className="group relative overflow-hidden px-10 py-4 rounded-full bg-white text-blue-600 font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
-              whileHover={{ scale: 1.02, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <span className="relative z-10">Quick Style</span>
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-blue-50 to-white"
-                initial={{ x: '100%' }}
-                whileHover={{ x: 0 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.button>
+                {/* Buttons Container */}
+                <motion.div 
+                  className="relative"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.6 }}
+                >
+                  
+                  {/* Additional Info */}
+                  <motion.div 
+                    className="relative flex justify-center items-center gap-8 text-white/90 text-sm font-medium"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.8 }}
+                  >
+                    {[
+                      "Instant Generation",
+                      "AI-Powered",
+                      "Unlimited Styles"
+                    ].map((text, i) => (
+                      <motion.div 
+                        key={i}
+                        className="flex items-center gap-2"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
+                        <span>{text}</span>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </motion.div>
+              </div>
+            </div>
 
-            <motion.button 
-              className="group relative overflow-hidden px-10 py-4 rounded-full bg-white/10 backdrop-blur-sm text-white font-semibold text-lg border-2 border-white/50 hover:border-white transition-all duration-300"
-              whileHover={{ scale: 1.02, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <span className="relative z-10">Custom Style</span>
-              <motion.div
-                className="absolute inset-0 bg-white/10"
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.button>
+            {/* Decorative Elements */}
+            <motion.div 
+              className="absolute left-10 top-10 w-72 h-72 bg-blue-200 opacity-20 rounded-full blur-3xl"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.1, 0.2, 0.1],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+              }}
+            />
+            <motion.div 
+              className="absolute right-10 bottom-10 w-96 h-96 bg-purple-200 opacity-20 rounded-full blur-3xl"
+              animate={{
+                scale: [1, 1.1, 1],
+                opacity: [0.1, 0.2, 0.1],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+              }}
+            />
           </div>
+        </section>
 
-          {/* Additional Info */}
-          <motion.div 
-            className="relative flex justify-center items-center gap-8 text-white/90 text-sm font-medium"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.8 }}
-          >
-            {[
-              "Instant Generation",
-              "AI-Powered",
-              "Unlimited Styles"
-            ].map((text, i) => (
-              <motion.div 
-                key={i}
-                className="flex items-center gap-2"
-                whileHover={{ scale: 1.05 }}
+      {/* Style Presets Grid */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-16">Style Presets</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {stylePresets.map((style, index) => (
+              <motion.div
+                key={style.id}
+                className="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
               >
-                <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
-                <span>{text}</span>
+                <div className="relative h-80">
+                  <img 
+                    src={style.image} 
+                    alt={style.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 className="text-2xl font-bold text-white mb-2">{style.name}</h3>
+                  <p className="text-white/90 mb-4">{style.description}</p>
+                  <motion.button
+                    whileHover={{ x: 5 }}
+                    className="flex items-center text-white font-semibold"
+                  >
+                    Customize Style <ChevronRight className="ml-2 h-5 w-5" />
+                  </motion.button>
+                </div>
               </motion.div>
             ))}
-          </motion.div>
-        </motion.div>
-      </div>
-    </div>
-
-    {/* Decorative Elements */}
-    <motion.div 
-      className="absolute left-10 top-10 w-72 h-72 bg-blue-200 opacity-20 rounded-full blur-3xl"
-      animate={{
-        scale: [1, 1.2, 1],
-        opacity: [0.1, 0.2, 0.1],
-      }}
-      transition={{
-        duration: 5,
-        repeat: Infinity,
-      }}
-    />
-    <motion.div 
-      className="absolute right-10 bottom-10 w-96 h-96 bg-purple-200 opacity-20 rounded-full blur-3xl"
-      animate={{
-        scale: [1, 1.1, 1],
-        opacity: [0.1, 0.2, 0.1],
-      }}
-      transition={{
-        duration: 4,
-        repeat: Infinity,
-      }}
-    />
-  </div>
-</section>
-
-{/* Style Examples Section */}
-<section className="py-10 bg-gray-50">
-  <div className="container mx-auto px-4">
-    <motion.h2 
-      className="text-4xl font-bold text-center text-gray-900 mb-16"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-    >
-      Style Examples
-    </motion.h2>
-    <div className="grid md:grid-cols-3 gap-8">
-      {[
-        { style: "Minimal Elegance", image: "/images/img-1.jpg" },
-        { style: "Urban Street Style", image: "/images/img-3.jpg" },
-        { style: "Bohemian Spirit", image: "/images/img-4.jpg" },
-      ].map((example, index) => (
-        <motion.div 
-          key={index}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: index * 0.2 }}
-          className="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
-        >
-          <div className="relative h-80 overflow-hidden">
-            <img 
-              src={example.image} 
-              alt={`${example.style} mood board`}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            />
-            {/* Overlay on hover */}
-            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </div>
-          <div className="p-6">
-            <h3 className="text-2xl font-semibold mb-4 group-hover:text-blue-600 transition-colors duration-300">
-              {example.style}
-            </h3>
-            <button className="relative overflow-hidden w-full py-3 px-4 border-2 border-gray-900 text-gray-900 rounded-lg group-hover:bg-gray-900 group-hover:text-white transition-all duration-300 hover:scale-[1.02]">
-              <span className="relative z-10">Try This Style</span>
-              <div className="absolute inset-0 bg-gray-900 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-            </button>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-16 bg-gradient-to-r from-blue-50 to-purple-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-16">Powerful Features</h2>
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {features.map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <feature.icon className="h-12 w-12 text-blue-600 mb-4" />
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
-      ))}
+        </div>
+      </section>
+
+      {/* Style Inspiration Section */}
+        <section className="py-16 relative overflow-hidden bg-white">
+          {/* Animated Grid Pattern Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50">
+            <div className="absolute inset-0" 
+              style={{
+                backgroundImage: `radial-gradient(circle at 2px 2px, rgba(99, 102, 241, 0.15) 1px, transparent 0)`,
+                backgroundSize: '40px 40px'
+              }}
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20"
+                animate={{
+                  opacity: [0.5, 0.3, 0.5],
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="container mx-auto px-4 relative">
+            <div className="text-center mb-8">
+              <motion.h2 
+                className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                Style Combinations
+              </motion.h2>
+              <motion.p 
+                className="text-xl text-gray-600 max-w-2xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                See how our AI combines different style elements to create unique looks
+              </motion.p>
+            </div>
+
+            {/* Interactive Style Guide Indicator */}
+            <motion.div
+              className="max-w-2xl mx-auto mb-10 bg-gradient-to-r from-blue-50 via-white to-purple-50 rounded-2xl p-6 shadow-xl border border-white/50 backdrop-blur-sm"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <div className="flex items-center justify-between gap-8">
+                <div className="flex-1">
+                  <motion.div 
+                    className="flex items-center gap-3 mb-2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.7 }}
+                  >
+                    <div className="h-px flex-1 bg-gradient-to-r from-blue-500/20 to-transparent"/>
+                    <span className="text-blue-600/80 text-sm font-medium uppercase tracking-wider">Interactive Guide</span>
+                    <div className="h-px flex-1 bg-gradient-to-l from-blue-500/20 to-transparent"/>
+                  </motion.div>
+                  <h3 className="text-gray-800 font-medium text-center">
+                    Discover style combinations by hovering over each category below
+                  </h3>
+                </div>
+              </div>
+
+              {/* Animated Indicator */}
+              <motion.div 
+                className="mt-4 flex justify-center gap-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.9 }}
+              >
+                {[0, 1, 2].map((index) => (
+                  <motion.div
+                    key={index}
+                    className="w-2 h-2 rounded-full bg-blue-500/30"
+                    animate={{
+                      scale: [1, 1.5, 1],
+                      opacity: [0.3, 1, 0.3],
+                    }}
+                    transition={{
+                      duration: 2,
+                      delay: index * 0.3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                ))}
+              </motion.div>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {[
+                {
+                  title: "Color Palettes",
+                  description: "From monochrome elegance to vibrant combinations",
+                  elements: ["Neutral", "Earth Tones", "Bold Accents", "Pastels"],
+                  gradient: "from-blue-500 to-blue-600"
+                },
+                {
+                  title: "Style Elements",
+                  description: "Mix and match different style components",
+                  elements: ["Minimalist", "Vintage", "Modern", "Artistic"],
+                  gradient: "from-purple-500 to-purple-600"
+                },
+                {
+                  title: "Occasions",
+                  description: "Adaptable looks to fit every occasion",
+                  elements: ["Casual", "Professional", "Evening", "Special Events"],
+                  gradient: "from-indigo-500 to-indigo-600"
+                }
+              ].map((category, index) => (
+                <motion.div
+                  key={index}
+                  className="relative group"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-500">
+                    {/* Gradient Border */}
+                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+                    
+                    <div className="mb-6">
+                      <h3 className="text-2xl font-bold text-gray-900 mb-3">{category.title}</h3>
+                      <p className="text-gray-600">{category.description}</p>
+                    </div>
+                    <div className="space-y-3">
+                      {category.elements.map((element, i) => (
+                        <motion.div
+                          key={i}
+                          className="flex items-center gap-3 group/item"
+                          whileHover={{ x: 10 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${category.gradient}`} />
+                          <span className="text-gray-700 group-hover/item:text-gray-900 transition-colors duration-300">
+                            {element}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    {/* Decorative Elements */}
+                    <motion.div 
+                      className="absolute -z-10 top-0 left-0 right-0 h-full rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      style={{
+                        background: 'radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(99, 102, 241, 0.06), transparent 40%)',
+                      }}
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Floating Geometric Shapes */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              {[...Array(3)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute"
+                  style={{
+                    width: Math.random() * 100 + 50,
+                    height: Math.random() * 100 + 50,
+                    borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
+                    background: `linear-gradient(45deg, ${i % 2 === 0 ? 'rgba(99, 102, 241, 0.1)' : 'rgba(147, 51, 234, 0.1)'})`,
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                  }}
+                  animate={{
+                    rotate: 360,
+                    x: [0, Math.random() * 50 - 25],
+                    y: [0, Math.random() * 50 - 25],
+                  }}
+                  transition={{
+                    duration: 20 + Math.random() * 10,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
     </div>
-  </div>
-</section>
+  );
+};
 
-    </main>
-  )
-}
-
-export default StyleSelection
+export default StyleSelection;
