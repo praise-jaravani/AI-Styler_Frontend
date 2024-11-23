@@ -2,23 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Wand2, Layers, Palette, Share2, ChevronRight } from 'lucide-react';
 import { StylePreset, Feature, StylePreview } from '../types/style';
-
-// Sample data - in production, this would come from your data source
-const stylePresets: StylePreset[] = [
-  {
-    id: '1',
-    name: "Minimal Elegance",
-    description: "Clean lines and understated sophistication",
-    image: "/images/img-1.jpg",
-    baseStyle: "minimal",
-    colorScheme: ["neutral", "monochrome"],
-    occasion: ["work", "formal"],
-    season: "all",
-    moodKeywords: ["sophisticated", "clean", "modern"],
-    previewImages: ["/images/img-1.jpg", "/images/img-3.jpg"]
-  },
-  // Add more presets...
-];
+import { stylePresets } from '../types/data';
 
 const features: Feature[] = [
   {

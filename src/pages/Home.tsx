@@ -1,12 +1,20 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import { Palette, Sliders, Wand2, Zap, Layers, Paintbrush, Sparkles } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Home: React.FC = () => {
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6 }
+  };
+
+  const navigate = useNavigate();
+
+  const navigateAndScroll = (path: string) => {
+    window.scrollTo(0, 0);
+    navigate(path);
   };
 
   return (
@@ -42,11 +50,13 @@ const Home: React.FC = () => {
             >
               <button 
                 className="bg-white text-gray-900 hover:bg-white/90 px-8 py-4 rounded-lg text-lg font-semibold transition-all"
+                onClick={() => navigateAndScroll('/custom-builder')}
               >
                 Create Your Style Board
               </button>
               <button 
                 className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg text-lg font-semibold transition-all"
+                onClick={() => navigateAndScroll('/style-presets')}
               >
                 Explore Style Presets
               </button>
@@ -138,9 +148,6 @@ const Home: React.FC = () => {
                   </div>
                   <div className="p-6">
                     <h3 className="text-2xl font-semibold mb-4">{example.style}</h3>
-                    <button className="w-full py-3 px-4 border-2 border-gray-900 text-gray-900 rounded-lg hover:bg-gray-900 hover:text-white transition-colors duration-300">
-                      Try This Style
-                    </button>
                   </div>
                 </motion.div>
               ))}
@@ -229,6 +236,7 @@ const Home: React.FC = () => {
                       className="group relative overflow-hidden px-8 py-4 rounded-full bg-white text-blue-600 font-semibold text-lg shadow-lg hover:shadow-xl transition-shadow"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
+                      onClick={() => navigateAndScroll('/style-presets')}
                     >
                       <span className="relative z-10">Quick Style</span>
                       <motion.div
@@ -243,6 +251,7 @@ const Home: React.FC = () => {
                       className="group relative overflow-hidden px-8 py-4 rounded-full text-white border-2 border-white font-semibold text-lg transition-colors duration-300 hover:text-blue-600"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
+                      onClick={() => navigateAndScroll('/custom-builder')}
                     >
                       <span className="relative z-10">Custom Style</span>
                       <motion.div
@@ -389,7 +398,7 @@ const Home: React.FC = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                     whileHover={{ y: -5, scale: 1.02 }}
-                    className="absolute bottom-0 left-0 w-72 bg-black/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/10"
+                    className="absolute bottom-0 left-0 w-72 bg-black/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/10 mb-10"
                   >
                     <div className="absolute -bottom-3 -right-3 w-12 h-12 bg-purple-500/20 backdrop-blur-md rounded-lg border border-white/10" />
                     <h3 className="text-white text-2xl font-semibold mb-4">Endless Possibilities</h3>
@@ -614,8 +623,9 @@ const Home: React.FC = () => {
                 className="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => navigateAndScroll('/about-us')}
               >
-                Get Started Now
+                Learn More About Us
               </motion.button>
             </motion.div>
           </div>

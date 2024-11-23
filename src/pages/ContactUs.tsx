@@ -2,8 +2,17 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, MessageSquare, Clock, Globe } from 'lucide-react';
 import Hero from "../components/Hero";
+import { useNavigate } from 'react-router-dom';
 
 const ContactUs: React.FC = () => {
+
+  const navigate = useNavigate();
+
+  const navigateAndScroll = (path: string) => {
+    window.scrollTo(0, 0);
+    navigate(path);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       {/* Hero Section */}
@@ -213,6 +222,7 @@ const ContactUs: React.FC = () => {
               className="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition-colors duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => navigateAndScroll('/style-presets')}
             >
               Get Started Free
             </motion.button>

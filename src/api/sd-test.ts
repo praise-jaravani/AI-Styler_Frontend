@@ -10,7 +10,7 @@ dotenv.config({
 });
 
 // Add your Hugging Face token here
-const HF_ACCESS_TOKEN = process.env.HF_ACCESS_TOKEN;
+const HF_ACCESS_TOKEN = process.env.REACT_APP_HF_ACCESS_TOKEN;
 
 async function generateImage(prompt: string, maxRetries: number = 5, initialWait: number = 10): Promise<void> {
     try {
