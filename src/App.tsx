@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import ContactUs from "./pages/ContactUs";
 import StyleSelection from "./pages/StyleSelection";
 import CustomBuilder from "./pages/CustomBuilder";
+import TestPopup from "./pages/TestPopup";
 
 const App: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const App: React.FC = () => {
         <Route path="/contact-us" element={<ContactUs/>} />
         <Route path="/style-presets" element={<StyleSelection/>} />
         <Route path="/custom-builder" element={<CustomBuilder/>} />
+        <Route path="/test-popup" element={<TestPopup/>} />
       </Routes>
       <Footer/>
     </Router>

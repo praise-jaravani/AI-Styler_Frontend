@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Palette, Users } from 'lucide-react';
 import Hero from "../components/Hero";
-import Cards from '../components/Cards';
 import { useNavigate } from 'react-router-dom';
 
 const AboutUs: React.FC = () => {
