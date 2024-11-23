@@ -193,13 +193,13 @@ const CustomBuilder: React.FC = () => {
                     <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 mr-3 mt-0.5">
                       3
                     </span>
-                    <span>Preview the styles you'd like to generate before submission</span>
+                    <span>Preview the style you'd like to generate before submission</span>
                   </li>
                   <li className="flex items-start">
                     <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 mr-3 mt-0.5">
                       4
                     </span>
-                    <span>Click the Generate Style Button to bring your vision to life</span>
+                    <span>Click the Generate Style button to bring your vision to life</span>
                   </li>
                 </ul>
               </div>
@@ -267,17 +267,17 @@ const CustomBuilder: React.FC = () => {
               {[
                 {
                   title: "Color Palettes",
-                  description: "From monochrome elegance to vibrant combinations",
+                  description: "Vibe check with the perfect palette",
                   elements: ["Neutral", "Earth Tones", "Bold Accents", "Pastels"]
                 },
                 {
                   title: "Style Elements",
-                  description: "Mix and match different style components",
+                  description: "Mix and match different style choices",
                   elements: ["Minimalist", "Vintage", "Modern", "Artistic"]
                 },
                 {
                   title: "Occasions",
-                  description: "Adaptable looks for every setting",
+                  description: "Adaptable looks to fit every occasion",
                   elements: ["Casual", "Professional", "Evening", "Special Events"]
                 }
               ].map((category, index) => (
@@ -359,9 +359,9 @@ const CustomBuilder: React.FC = () => {
             </motion.h2>
             <div className="grid md:grid-cols-3 gap-8">
               {[
-                { style: "Minimal Elegance", image: "/images/img-1.jpg" },
-                { style: "Urban Street Style", image: "/images/img-3.jpg" },
-                { style: "Bohemian Spirit", image: "/images/img-4.jpg" },
+                { style: "Minimal Elegance", image: "/images/img-5.jpg" },
+                { style: "Urban Street Style", image: "/images/pic2.jpg" },
+                { style: "Romantic Date Night", image: "/images/romance2.jpg" },
               ].map((example, index) => (
                 <motion.div 
                   key={index}

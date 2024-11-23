@@ -32,96 +32,96 @@ export const stylePresets: StylePreset[] = [
         id: '1',
         name: "Minimal Elegance",
         description: "Clean lines and understated sophistication",
-        image: "/images/img-1.jpg",
+        image: "/images/pic1.jpg",
         baseStyle: "Minimalist",
         colorScheme: ["Neutral", "Monochrome"],
         occasion: ["Work", "Formal"],
         season: "All Seasons",
         moodKeywords: ["sophisticated", "clean", "modern"],
-        previewImages: ["/images/img-1.jpg", "/images/img-3.jpg"]
+        previewImages: ["/images/pic1.jpg", "/images/pic1.jpg"]
     },
     {
         id: '2',
         name: "Bohemian Spirit",
         description: "Free-spirited and artistic with natural elements",
-        image: "/images/bohemian.jpg",
+        image: "/images/pic5.jpg",
         baseStyle: "Bohemian",
         colorScheme: ["Earth Tones", "Vibrant"],
         occasion: ["Casual", "Vacation"],
         season: "Summer",
         moodKeywords: ["artistic", "free-spirited", "natural"],
-        previewImages: ["/images/bohemian.jpg", "/images/bohemian.jpg"]
+        previewImages: ["/images/pic5.jpg", "/images/pic5.jpg"]
     },
     {
         id: '3',
         name: "Urban Edge",
         description: "Contemporary streetwear with bold attitude",
-        image: "/images/img-3.jpg",
+        image: "/images/pic10.jpg",
         baseStyle: "Streetwear",
         colorScheme: ["Monochrome", "Vibrant"],
         occasion: ["Casual", "Evening"],
         season: "All Seasons",
         moodKeywords: ["bold", "urban", "contemporary"],
-        previewImages: ["/images/img-3.jpg", "/images/img-5.jpg"]
+        previewImages: ["/images/pic10.jpg", "/images/pic10.jpg"]
     },
     {
         id: '4',
         name: "Classic Professional",
         description: "Timeless sophistication for the modern professional",
-        image: "/images/img-4.jpg",
+        image: "/images/pic9.jpg",
         baseStyle: "Classic",
         colorScheme: ["Neutral", "Earth Tones"],
         occasion: ["Work", "Formal"],
         season: "All Seasons",
         moodKeywords: ["professional", "polished", "refined"],
-        previewImages: ["/images/img-4.jpg", "/images/img-6.jpg"]
+        previewImages: ["/images/pic9.jpg", "/images/pic9.jpg"]
     },
     {
         id: '5',
         name: "Romantic Evening",
         description: "Elegant and feminine with graceful details",
-        image: "/images/img-5.jpg",
+        image: "/images/pic4.jpg",
         baseStyle: "Romantic",
         colorScheme: ["Jewel Tones", "Pastel"],
         occasion: ["Evening", "Formal"],
         season: "Spring",
         moodKeywords: ["elegant", "feminine", "graceful"],
-        previewImages: ["/images/img-5.jpg", "/images/img-7.jpg"]
+        previewImages: ["/images/pic4.jpg", "/images/pic4.jpg"]
     },
     {
         id: '6',
         name: "Active Lifestyle",
         description: "Performance meets style for the dynamic individual",
-        image: "/images/img-6.jpg",
+        image: "/images/athletic.jpg",
         baseStyle: "Sporty",
         colorScheme: ["Vibrant", "Neutral"],
         occasion: ["Athleisure", "Casual"],
         season: "Summer",
         moodKeywords: ["active", "dynamic", "comfortable"],
-        previewImages: ["/images/img-6.jpg", "/images/img-8.jpg"]
+        previewImages: ["/images/athletic.jpg", "/images/athletic.jpg"]
     },
     {
         id: '7',
         name: "Vacation Boho",
         description: "Free-spirited resort wear with artistic flair",
-        image: "/images/img-8.jpg",
+        image: "/images/bohemian3.jpg",
         baseStyle: "Bohemian",
         colorScheme: ["Pastel", "Vibrant"],
         occasion: ["Vacation", "Casual"],
         season: "Summer",
         moodKeywords: ["relaxed", "artistic", "breezy"],
-        previewImages: ["/images/img-8.jpg", "/images/img-10.jpg"]
+        previewImages: ["/images/bohemian3.jpg", "/images/bohemian3.jpg"]
     },
     {
         id: '8',
         name: "Night Out Edge",
         description: "Bold streetwear with evening sophistication",
-        image: "/images/img-9.jpg",
+        image: "/images/urban1.jpg",
         baseStyle: "Streetwear",
         colorScheme: ["Jewel Tones", "Monochrome"],
         occasion: ["Evening", "Casual"],
         season: "All Seasons",
         moodKeywords: ["bold", "edgy", "sophisticated"],
-        previewImages: ["/images/img-9.jpg", "/images/img-11.jpg"]
+        previewImages: ["/images/urban1.jpg", "/images/urban1.jpg"]
     }
 ];

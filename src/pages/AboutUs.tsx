@@ -18,110 +18,110 @@ const AboutUs: React.FC = () => {
 
       <Hero/>
 
-      <main className="container mx-auto px-4 py-24">
-        {/* Main About Section */}
-        <motion.div 
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">
-            About AI Styler
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We combine cutting-edge AI technology with fashion expertise to help you discover and visualize your perfect style.
-          </p>
-        </motion.div>
+        <main className="container mx-auto px-4 py-24">
+          {/* Main About Section */}
+          <motion.div 
+            className="text-center mb-20"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h1 className="text-5xl font-bold text-gray-900 mb-6">
+              About AI Styler
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              We combine cutting-edge AI technology with fashion expertise to help you discover and visualize your perfect style.
+            </p>
+          </motion.div>
 
-        {/* Values Section */}
-        <div className="grid md:grid-cols-3 gap-12 mb-20">
-          {[
-            {
-              icon: <Sparkles className="w-12 h-12 text-blue-600" />,
-              title: "Innovation",
-              description: "Leveraging the latest AI technology to transform how you explore and discover fashion."
-            },
-            {
-              icon: <Palette className="w-12 h-12 text-blue-600" />,
-              title: "Creativity",
-              description: "Pushing the boundaries of style visualization to bring your fashion ideas to life."
-            },
-            {
-              icon: <Users className="w-12 h-12 text-blue-600" />,
-              title: "Community",
-              description: "Building a platform where style enthusiasts can explore and share their fashion vision."
-            }
-          ].map((value, index) => (
-            <motion.div
-              key={index}
-              className="flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ 
-                duration: 0.4,
-                delay: index * 0.1,
-                ease: "easeOut"
-              }}
-            >
-              <motion.div 
-                className="mb-6"
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
+          {/* Values Section */}
+          <div className="grid md:grid-cols-3 gap-12 mb-20">
+            {[
+              {
+                icon: <Sparkles className="w-12 h-12 text-blue-600" />,
+                title: "Innovation",
+                description: "Leveraging the latest AI technology to transform how you explore and discover fashion."
+              },
+              {
+                icon: <Palette className="w-12 h-12 text-blue-600" />,
+                title: "Creativity",
+                description: "Pushing the boundaries of style visualization to bring your fashion ideas to life."
+              },
+              {
+                icon: <Users className="w-12 h-12 text-blue-600" />,
+                title: "Community",
+                description: "Building a platform where style enthusiasts can explore and share their fashion vision."
+              }
+            ].map((value, index) => (
+              <motion.div
+                key={index}
+                className="flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ 
-                  delay: 0.2 + index * 0.1,
-                  type: "spring",
-                  stiffness: 200
+                  duration: 0.4,
+                  delay: index * 0.1,
+                  ease: "easeOut"
                 }}
               >
-                {value.icon}
+                <motion.div 
+                  className="mb-6"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    delay: 0.2 + index * 0.1,
+                    type: "spring",
+                    stiffness: 200
+                  }}
+                >
+                  {value.icon}
+                </motion.div>
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">
+                  {value.title}
+                </h3>
+                <p className="text-gray-600">
+                  {value.description}
+                </p>
               </motion.div>
-              <h3 className="text-2xl font-semibold mb-4 text-gray-900">
-                {value.title}
-              </h3>
-              <p className="text-gray-600">
-                {value.description}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Mission Statement */}
-        <motion.div 
-          className="bg-blue-600 text-white p-12 rounded-2xl mb-1"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ 
-            duration: 0.5,
-            ease: "easeOut"
-          }}
-        >
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.h2 
-              className="text-3xl font-bold mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.4 }}
-            >
-              Our Mission
-            </motion.h2>
-            <motion.p 
-              className="text-lg"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.4 }}
-            >
-              To empower everyone to express their unique style with confidence through innovative AI-powered fashion visualization tools.
-            </motion.p>
+            ))}
           </div>
-        </motion.div>
-      </main>
+
+          {/* Mission Statement */}
+          <motion.div 
+            className="bg-blue-600 text-white p-12 rounded-2xl mb-1"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ 
+              duration: 0.5,
+              ease: "easeOut"
+            }}
+          >
+            <div className="max-w-3xl mx-auto text-center">
+              <motion.h2 
+                className="text-3xl font-bold mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2, duration: 0.4 }}
+              >
+                Our Mission
+              </motion.h2>
+              <motion.p 
+                className="text-lg"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3, duration: 0.4 }}
+              >
+                To empower everyone to express their unique style with confidence through innovative AI-powered fashion visualization tools.
+              </motion.p>
+            </div>
+          </motion.div>
+        </main>
 
         {/* Journey Section with Enhanced Video Background */}
         <section className="relative min-h-screen overflow-hidden -mx-2">
@@ -161,29 +161,29 @@ const AboutUs: React.FC = () => {
             ))}
           </div>
           
-          <div className="relative py-20">
+          <div className="relative py-12 md:py-20">
             <div className="container mx-auto px-4">
               {/* Section Header */}
               <motion.div 
-                className="text-center mb-20"
+                className="text-center mb-12 md:mb-20"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-5xl font-bold text-white mb-6">
+                <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6">
                   Our Journey
                 </h2>
-                <div className="w-24 h-1 bg-blue-500 mx-auto rounded-full mb-6" />
-                <p className="text-xl text-gray-200 max-w-2xl mx-auto">
+                <div className="w-16 md:w-24 h-1 bg-blue-500 mx-auto rounded-full mb-4 md:mb-6" />
+                <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto px-4">
                   From concept to reality, we're transforming the future of fashion visualization
                 </p>
               </motion.div>
 
               {/* Timeline */}
               <div className="max-w-6xl mx-auto relative">
-                {/* Center Line */}
+                {/* Center Line - hidden on mobile */}
                 <motion.div 
-                  className="absolute left-1/2 top-0 w-px h-full bg-gradient-to-b from-blue-500/0 via-blue-500 to-blue-500/0"
+                  className="absolute hidden md:block left-1/2 top-0 w-px h-full bg-gradient-to-b from-blue-500/0 via-blue-500 to-blue-500/0"
                   initial={{ height: 0 }}
                   whileInView={{ height: "100%" }}
                   viewport={{ once: true }}
@@ -215,8 +215,8 @@ const AboutUs: React.FC = () => {
                 ].map((milestone, index) => (
                   <motion.div 
                     key={index}
-                    className={`relative flex items-center mb-24 last:mb-0 ${
-                      index % 2 === 0 ? 'justify-start' : 'justify-end'
+                    className={`relative flex items-center mb-12 md:mb-24 last:mb-0 ${
+                      index % 2 === 0 ? 'justify-start md:justify-start' : 'justify-start md:justify-end'
                     }`}
                     initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -224,35 +224,35 @@ const AboutUs: React.FC = () => {
                     transition={{ delay: 0.2, duration: 0.5 }}
                   >
                     {/* Content Card */}
-                    <div className={`w-[calc(50%-40px)] ${
-                      index % 2 === 0 ? 'mr-10' : 'ml-10'
-                    }`}>
+                    <div className={`w-full md:w-[calc(50%-40px)] ${
+                      index % 2 === 0 ? 'md:mr-10' : 'md:ml-10'
+                    } px-4 md:px-0`}>
                       <motion.div 
-                        className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/10 hover:bg-white/15 transition-all duration-300"
+                        className="bg-white/10 backdrop-blur-md rounded-xl md:rounded-2xl p-6 md:p-8 border border-white/10 hover:bg-white/15 transition-all duration-300"
                         whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
                       >
                         {/* Year Badge */}
-                        <div className="inline-block bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                        <div className="inline-block bg-blue-600 text-white px-3 md:px-4 py-1 md:py-2 rounded-full text-sm font-semibold mb-3 md:mb-4">
                           {milestone.year}
                         </div>
                         
                         {/* Icon */}
-                        <div className="text-4xl mb-4">{milestone.icon}</div>
+                        <div className="text-3xl md:text-4xl mb-3 md:mb-4">{milestone.icon}</div>
                         
                         {/* Content */}
-                        <h3 className="text-2xl font-bold text-white mb-3">
+                        <h3 className="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3">
                           {milestone.title}
                         </h3>
-                        <p className="text-gray-200 mb-4">
+                        <p className="text-sm md:text-base text-gray-200 mb-3 md:mb-4">
                           {milestone.description}
                         </p>
                         
                         {/* Achievements */}
-                        <div className="space-y-2">
+                        <div className="space-y-1.5 md:space-y-2">
                           {milestone.achievements.map((achievement, i) => (
                             <div 
                               key={i}
-                              className="flex items-center text-gray-300"
+                              className="flex items-center text-sm md:text-base text-gray-300"
                             >
                               <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2" />
                               {achievement}
@@ -262,8 +262,8 @@ const AboutUs: React.FC = () => {
                       </motion.div>
                     </div>
 
-                    {/* Center Point */}
-                    <div className="absolute left-1/2 transform -translate-x-1/2">
+                    {/* Center Point - Hidden on mobile */}
+                    <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2">
                       <motion.div 
                         className="w-4 h-4 bg-blue-500 rounded-full"
                         initial={{ scale: 0 }}
@@ -291,7 +291,6 @@ const AboutUs: React.FC = () => {
           </div>
         </section>
 
-
         {/* Team Section */}
         <section className="py-24 bg-gradient-to-b from-white to-gray-50">
           <div className="container mx-auto px-4">
@@ -301,38 +300,103 @@ const AboutUs: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-bold mb-4">Meet Our Team</h2>
-              <p className="text-xl text-gray-600">The innovators behind AI Styler</p>
+              <h2 className="text-4xl font-bold mb-4">Meet The Developer</h2>
+              <p className="text-xl text-gray-600">The innovator behind AI Styler</p>
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {[
-                { name: "Alex Chen", role: "AI Lead", image: "/images/img-1.jpg" },
-                { name: "Sarah Wilson", role: "Fashion Director", image: "/images/img-10.jpg" },
-                { name: "Mike Roberts", role: "Tech Lead", image: "/images/img-7.jpg" }
-              ].map((member, index) => (
+            <div className="max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                {/* Image Column */}
                 <motion.div
-                  key={index}
                   className="group relative"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.2 }}
                 >
-                  <div className="relative h-80 mb-6 overflow-hidden rounded-xl">
+                  <div className="relative h-[500px] overflow-hidden rounded-xl">
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0" />
                     <img 
-                      src={member.image} 
-                      alt={member.name}
+                      src="/images/praise.jpg" 
+                      alt="Praise Jaravani"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
-                  <div className="text-center">
-                    <h3 className="text-xl font-semibold">{member.name}</h3>
-                    <p className="text-gray-600">{member.role}</p>
+                </motion.div>
+
+                {/* Content Column */}
+                <motion.div
+                  className="space-y-6"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <div className="space-y-4">
+                    <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                      Praise Jaravani
+                    </h3>
+                    <p className="text-xl text-gray-600 font-medium">
+                      Junior Software Developer
+                    </p>
+                  </div>
+
+                  <div className="space-y-4 text-gray-600">
+                    <p className="leading-relaxed">
+                      🚀 Passionate software engineering student crafting innovative solutions through code. Specializing in modern web technologies and exploring the frontiers of AI/ML, Cyber Security, and Game development.
+                    </p>
+                    
+                    <div className="grid grid-cols-2 gap-4 pt-4">
+                      <div className="space-y-2">
+                        <h4 className="font-semibold text-gray-900">Core Skills</h4>
+                        <ul className="space-y-1">
+                          <li className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
+                            <span>HTML5 & JavaScript</span>
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
+                            <span>AI/ML Development</span>
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
+                            <span>Cyber Security</span>
+                          </li>
+                        </ul>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <h4 className="font-semibold text-gray-900">Strengths</h4>
+                        <ul className="space-y-1">
+                          <li className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-purple-500 rounded-full" />
+                            <span>Problem Solving</span>
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-purple-500 rounded-full" />
+                            <span>Communication</span>
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-purple-500 rounded-full" />
+                            <span>Collaboration</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <motion.div 
+                      className="pt-6"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4 }}
+                    >
+                      <p className="italic text-gray-500">
+                        "Let's connect and embark on thrilling software engineering adventures! 🌟"
+                      </p>
+                    </motion.div>
                   </div>
                 </motion.div>
-              ))}
+              </div>
             </div>
           </div>
         </section>

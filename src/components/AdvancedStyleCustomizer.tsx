@@ -10,6 +10,13 @@ interface AdvancedStyleCustomizerProps {
   onClose: () => void;
 }
 
+interface RawStyleInputs {
+  baseStyle: string;
+  colorScheme: string[];
+  occasion: string[];
+  season: string;
+}
+
 const AdvancedStyleCustomizer: React.FC<AdvancedStyleCustomizerProps> = ({ onClose }) => {
   const [baseStyle, setBaseStyle] = useState('');
   const [colorPalette, setColorPalette] = useState('');
@@ -52,23 +59,47 @@ const AdvancedStyleCustomizer: React.FC<AdvancedStyleCustomizerProps> = ({ onClo
   );
 
   const generateStyle = async () => {
-    const styleInputs = {
-      baseStyle: baseStyle as BaseStyle,
-      colorScheme: [colorPalette as ColorPalette],
-      occasion: [occasion as Occasion],
-      season: season as Season,
+    if (!baseStyle || !colorPalette || !occasion || !season) {
+      throw new Error("Please fill in all style fields");
+    }
+  
+    const rawInputs: RawStyleInputs = {
+      baseStyle: baseStyle,
+      colorScheme: [colorPalette],
+      occasion: [occasion],
+      season: season
     };
-
-    const result = await PromptGenerator.generateImageFromStyle(styleInputs);
+  
+    console.log("Raw Style Inputs:", rawInputs);
+  
+    // Type assert the raw inputs to match the required types
+    const styleInputs = {
+      baseStyle: rawInputs.baseStyle as unknown as BaseStyle,
+      colorScheme: rawInputs.colorScheme as unknown as ColorPalette[],
+      occasion: rawInputs.occasion as unknown as Occasion[],
+      season: rawInputs.season as unknown as Season
+    };
+  
+    // Use the advanced generation method
+    const result = await PromptGenerator.generateAdvancedImageFromStyle(styleInputs);
+    console.log("Generation Result:", result);
+    
     setGenerationResponse(result);
-
+  
     if (!result.success) {
-      throw new Error(result.error);
+      throw new Error(result.error || "Generation failed");
     }
   };
 
+
   const handleGenerate = async () => {
     try {
+      // Validate all fields are filled
+      if (!baseStyle.trim() || !colorPalette.trim() || !occasion.trim() || !season.trim()) {
+        setError("Please fill in all style fields");
+        return;
+      }
+
       setIsGenerating(true);
       setError(undefined);
       setHasGenerated(true);
@@ -76,6 +107,7 @@ const AdvancedStyleCustomizer: React.FC<AdvancedStyleCustomizerProps> = ({ onClo
 
       await generateStyle();
     } catch (error) {
+      console.error("Generation Error:", error);
       setError(error instanceof Error ? error.message : 'An unexpected error occurred');
     } finally {
       setIsGenerating(false);
@@ -204,19 +236,37 @@ const StyleInput: React.FC<{
   label: string;
   value: string;
   onChange: (value: string) => void;
-}> = ({ icon: Icon, label, value, onChange }) => (
-  <div className="space-y-2">
-    <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
-      <Icon className="w-4 h-4" />
-      {label}
-    </label>
-    <input
-      type="text"
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-    />
-  </div>
-);
+}> = ({ icon: Icon, label, value, onChange }) => {
+  const getPlaceholder = () => {
+    switch(label) {
+      case "Base Style":
+        return "Enter any style description (e.g., Modern Futuristic)";
+      case "Color Palette":
+        return "Enter color preferences (e.g., Bold Neon)";
+      case "Occasion":
+        return "Enter occasion type (e.g., Beach Party)";
+      case "Season":
+        return "Enter season preference (e.g., Late Summer)";
+      default:
+        return "";
+    }
+  };
+
+  return (
+    <div className="space-y-2">
+      <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
+        <Icon className="w-4 h-4" />
+        {label}
+      </label>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={getPlaceholder()}
+        className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+      />
+    </div>
+  );
+};
 
 export default AdvancedStyleCustomizer;

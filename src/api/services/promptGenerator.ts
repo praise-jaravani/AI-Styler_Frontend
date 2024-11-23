@@ -50,6 +50,55 @@ class PromptGenerator {
     return array[Math.floor(Math.random() * array.length)];
   }
 
+
+  public static generateAdvancedPrompt(inputs: StyleInputs): PromptGenerationResponse {
+    try {
+      const styleDescription = `${inputs.baseStyle} style, ${inputs.colorScheme[0]} color scheme, designed for ${inputs.occasion[0]}, suitable for ${inputs.season}`;
+      
+      const prompt = `
+        High-quality fashion mood board.
+        Style elements: ${styleDescription}.
+        Professional fashion photography, detailed textures, perfect lighting,
+        modern composition, trending on Pinterest, magazine editorial quality,
+        8k resolution
+      `.trim().replace(/\s+/g, ' ');
+
+      return {
+        success: true,
+        prompt: prompt
+      };
+    } catch (error) {
+      return {
+        success: false,
+        prompt: '',
+        error: error instanceof Error ? error.message : 'Failed to generate prompt'
+      };
+    }
+  }
+
+  public static async generateAdvancedImageFromStyle(inputs: StyleInputs): Promise<StyleGenerationResponse> {
+    const promptResult = this.generateAdvancedPrompt(inputs);
+    
+    if (!promptResult.success) {
+      return {
+        success: false,
+        images: [],
+        error: promptResult.error
+      };
+    }
+
+    try {
+      const StableDiffusionAPI = (await import('./stablediffusion-api')).default;
+      return await StableDiffusionAPI.generateImage(promptResult.prompt);
+    } catch (error) {
+      return {
+        success: false,
+        images: [],
+        error: error instanceof Error ? error.message : 'Failed to generate image'
+      };
+    }
+  }
+
   private static buildStyleDescription(inputs: StyleInputs): string {
     const styleWords = this.styleDescriptors[inputs.baseStyle];
     const colorWords = inputs.colorScheme.flatMap(color => this.colorDescriptors[color]);

@@ -127,9 +127,9 @@ const Home: React.FC = () => {
             </motion.h2>
             <div className="grid md:grid-cols-3 gap-8">
               {[
-                { style: "Minimal Elegance", image: "/images/img-1.jpg" },
-                { style: "Urban Street Style", image: "/images/img-3.jpg" },
-                { style: "Bohemian Spirit", image: "/images/img-4.jpg" },
+                { style: "Minimal Elegance", image: "/images/minimal.jpg" },
+                { style: "Urban Street Style", image: "/images/urban1.jpg" },
+                { style: "Bohemian Spirit", image: "/images/bohemian3.jpg" },
               ].map((example, index) => (
                 <motion.div 
                   key={index}

@@ -1,16 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, MessageSquare, Clock, Globe } from 'lucide-react';
-import Hero from "../components/Hero";
+import { Mail, Phone, MapPin, MessageSquare, Clock, Globe, Loader2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import emailjs from '@emailjs/browser';
 
 const ContactUs: React.FC = () => {
-
   const navigate = useNavigate();
+  const [isSending, setIsSending] = useState(false);
+  const [sendStatus, setSendStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
   const navigateAndScroll = (path: string) => {
     window.scrollTo(0, 0);
     navigate(path);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSending(true);
+    setSendStatus('idle');
+
+    try {
+      await emailjs.send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID!,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID!,
+        {
+          from_name: formData.name,
+          reply_to: formData.email,
+          message: formData.message,
+        },
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+      );
+
+      setSendStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('Email error:', error);
+      setSendStatus('error');
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -108,15 +149,19 @@ const ContactUs: React.FC = () => {
               <p className="text-gray-600">We'll get back to you within 24 hours</p>
             </div>
 
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Name
                 </label>
                 <input
                   type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                   placeholder="Your name"
+                  required
                 />
               </div>
 
@@ -126,8 +171,12 @@ const ContactUs: React.FC = () => {
                 </label>
                 <input
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                   placeholder="your@email.com"
+                  required
                 />
               </div>
 
@@ -136,18 +185,53 @@ const ContactUs: React.FC = () => {
                   Message
                 </label>
                 <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
                   rows={5}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                   placeholder="Your message"
+                  required
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-300"
+                disabled={isSending}
+                className={`w-full flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-300 ${
+                  isSending ? 'opacity-70 cursor-not-allowed' : ''
+                }`}
               >
-                Send Message
+                {isSending ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin mr-2" />
+                    Sending...
+                  </>
+                ) : (
+                  'Send Message'
+                )}
               </button>
+
+              {/* Status Messages */}
+              {sendStatus === 'success' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-green-600 text-center"
+                >
+                  Message sent successfully! We'll get back to you soon.
+                </motion.div>
+              )}
+
+              {sendStatus === 'error' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-red-600 text-center"
+                >
+                  Failed to send message. Please try again later.
+                </motion.div>
+              )}
             </form>
           </motion.div>
 
@@ -162,9 +246,9 @@ const ContactUs: React.FC = () => {
               <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
               <div className="space-y-6">
                 {[
-                  { icon: <Mail />, text: "support@aistyler.com", label: "Email" },
-                  { icon: <Phone />, text: "+1 (555) 123-4567", label: "Phone" },
-                  { icon: <MapPin />, text: "123 AI Street, Tech City, TC 12345", label: "Address" },
+                  { icon: <Mail />, text: "jaravanipraise@gmail.com", label: "Email" },
+                  { icon: <Phone />, text: "+27 7979 285 34", label: "Phone" },
+                  { icon: <MapPin />, text: "Based in Capetown, South Africa", label: "Address" },
                 ].map((item, index) => (
                   <motion.div 
                     key={index}
