@@ -4,6 +4,10 @@ import { Wand2, Layers, Palette, Share2, ChevronRight } from 'lucide-react';
 import { StylePreset, Feature, StylePreview } from '../types/style';
 import { stylePresets } from '../types/data';
 
+import { useState } from 'react';
+import Popup from '../components/Popup';
+import BasicStyleCustomizer from '../components/BasicStyleCustomizer';
+
 const features: Feature[] = [
   {
     icon: Wand2,
@@ -23,6 +27,15 @@ const features: Feature[] = [
 ];
 
 const StyleSelection: React.FC = () => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedPreset, setSelectedPreset] = useState<StylePreset | null>(null);
+  const [showAllPresets, setShowAllPresets] = useState(false);
+
+  const handleStyleClick = (preset: StylePreset) => {
+    setSelectedPreset(preset);
+    setIsPopupOpen(true);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       {/* Hero Section with Particles */}
@@ -165,19 +178,20 @@ const StyleSelection: React.FC = () => {
         </section>
 
       {/* Style Presets Grid */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16">Style Presets</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {stylePresets.map((style, index) => (
-              <motion.div
-                key={style.id}
-                className="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-16">Style Presets</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {stylePresets.slice(0, showAllPresets ? undefined : 3).map((style, index) => (
+                <motion.div
+                  key={style.id}
+                  className="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  onClick={() => handleStyleClick(style)}
+                >
                 <div className="relative h-80">
                   <img 
                     src={style.image} 
@@ -192,6 +206,10 @@ const StyleSelection: React.FC = () => {
                   <motion.button
                     whileHover={{ x: 5 }}
                     className="flex items-center text-white font-semibold"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleStyleClick(style);
+                    }}
                   >
                     Customize Style <ChevronRight className="ml-2 h-5 w-5" />
                   </motion.button>
@@ -199,6 +217,28 @@ const StyleSelection: React.FC = () => {
               </motion.div>
             ))}
           </div>
+
+            {/* Show More/Less Button */}
+            <motion.div 
+              className="flex justify-center mt-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <motion.button
+                onClick={() => setShowAllPresets(!showAllPresets)}
+                className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg text-white font-semibold hover:opacity-90 shadow-lg hover:shadow-xl transition-all duration-300"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  {showAllPresets ? 'Show Less' : 'Show More Styles'}
+                  <span className="text-white/80">
+                    {showAllPresets ? '↑' : '↓'}
+                  </span>
+                </span>
+              </motion.button>
+            </motion.div>
         </div>
       </section>
 
@@ -272,67 +312,90 @@ const StyleSelection: React.FC = () => {
             </div>
 
             {/* Interactive Style Guide Indicator */}
-            <motion.div
-              className="max-w-2xl mx-auto mb-10 bg-gradient-to-r from-blue-50 via-white to-purple-50 rounded-2xl p-6 shadow-xl border border-white/50 backdrop-blur-sm"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              <div className="flex items-center justify-between gap-8">
-                <div className="flex-1">
+              <motion.div
+                className="max-w-2xl mx-auto mb-10 bg-gradient-to-r from-blue-50 via-white to-purple-50 rounded-2xl p-6 shadow-xl border border-white/50 backdrop-blur-sm"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                <div className="flex items-center justify-between gap-8">
+                  <div className="flex-1">
+                    <motion.div 
+                      className="flex items-center gap-3 mb-2"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.7 }}
+                    >
+                      <div className="h-px flex-1 bg-gradient-to-r from-blue-500/20 to-transparent"/>
+                      <span className="text-blue-600/80 text-sm font-medium uppercase tracking-wider">Interactive Guide</span>
+                      <div className="h-px flex-1 bg-gradient-to-l from-blue-500/20 to-transparent"/>
+                    </motion.div>
+                    <h3 className="text-gray-800 font-medium text-center">
+                      Explore style combinations through hover and click interactions
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Interactive Indicators */}
+                <div className="mt-6 flex justify-center gap-8">
+                  {/* Hover Indicator */}
                   <motion.div 
-                    className="flex items-center gap-3 mb-2"
+                    className="flex items-center gap-2"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 0.7 }}
+                    transition={{ delay: 0.9 }}
                   >
-                    <div className="h-px flex-1 bg-gradient-to-r from-blue-500/20 to-transparent"/>
-                    <span className="text-blue-600/80 text-sm font-medium uppercase tracking-wider">Interactive Guide</span>
-                    <div className="h-px flex-1 bg-gradient-to-l from-blue-500/20 to-transparent"/>
+                    <motion.div
+                      className="w-2 h-2 rounded-full bg-blue-500/30"
+                      animate={{
+                        scale: [1, 1.5, 1],
+                        opacity: [0.3, 1, 0.3],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                    <span className="text-sm text-gray-600">Hover to preview</span>
                   </motion.div>
-                  <h3 className="text-gray-800 font-medium text-center">
-                    Discover style combinations by hovering over each category below
-                  </h3>
-                </div>
-              </div>
 
-              {/* Animated Indicator */}
-              <motion.div 
-                className="mt-4 flex justify-center gap-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.9 }}
-              >
-                {[0, 1, 2].map((index) => (
-                  <motion.div
-                    key={index}
-                    className="w-2 h-2 rounded-full bg-blue-500/30"
-                    animate={{
-                      scale: [1, 1.5, 1],
-                      opacity: [0.3, 1, 0.3],
-                    }}
-                    transition={{
-                      duration: 2,
-                      delay: index * 0.3,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  />
-                ))}
+                  {/* Click Indicator */}
+                  <motion.div 
+                    className="flex items-center gap-2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.1 }}
+                  >
+                    <motion.div
+                      className="w-2 h-2 rounded-full bg-purple-500/30"
+                      animate={{
+                        scale: [1, 1.5, 1],
+                        opacity: [0.3, 1, 0.3],
+                      }}
+                      transition={{
+                        duration: 2,
+                        delay: 0.3,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                    <span className="text-sm text-gray-600">Click to select</span>
+                  </motion.div>
+                </div>
               </motion.div>
-            </motion.div>
 
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {[
                 {
                   title: "Color Palettes",
-                  description: "From monochrome elegance to vibrant combinations",
+                  description: "Vibe check with the perfect palette",
                   elements: ["Neutral", "Earth Tones", "Bold Accents", "Pastels"],
                   gradient: "from-blue-500 to-blue-600"
                 },
                 {
                   title: "Style Elements",
-                  description: "Mix and match different style components",
+                  description: "Mix and match different style choices",
                   elements: ["Minimalist", "Vintage", "Modern", "Artistic"],
                   gradient: "from-purple-500 to-purple-600"
                 },
@@ -416,6 +479,18 @@ const StyleSelection: React.FC = () => {
             </div>
           </div>
         </section>
+
+        <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
+          <BasicStyleCustomizer 
+            onClose={() => setIsPopupOpen(false)}
+            presetStyle={selectedPreset ? {
+              baseStyle: selectedPreset.baseStyle,
+              colorScheme: selectedPreset.colorScheme,
+              occasion: selectedPreset.occasion,
+              season: selectedPreset.season
+            } : undefined}
+          />
+        </Popup>
 
     </div>
   );

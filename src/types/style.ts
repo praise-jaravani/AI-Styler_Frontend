@@ -1,14 +1,15 @@
 import { ElementType } from 'react';
+import { BaseStyle, ColorPalette, Occasion, Season } from './data';
 
 export interface StylePreset {
   id: string;
   name: string;
   description: string;
   image: string;
-  baseStyle: string;
-  colorScheme: string[];
-  occasion: string[];
-  season: string;
+  baseStyle: BaseStyle;        
+  colorScheme: ColorPalette[]; 
+  occasion: Occasion[];       
+  season: Season;            
   moodKeywords: string[];
   previewImages: string[];
 }

@@ -315,7 +315,7 @@ const Home: React.FC = () => {
         </section>
         
         {/* Video Showcase Section */}
-        <section className="relative h-[90vh] overflow-hidden">
+        <section className="relative h-[100vh] overflow-hidden">
           {/* Video */}
           <video
             className="absolute top-0 left-0 w-full h-full object-cover scale-105"
@@ -339,7 +339,7 @@ const Home: React.FC = () => {
                   transition={{ duration: 0.6 }}
                   className="text-white"
                 >
-                  <div className="flex gap-2 mb-8">
+                  <div className="flex gap-2 mb-8 mt-8">
                     {[...Array(3)].map((_, i) => (
                       <motion.div 
                         key={i}
@@ -352,7 +352,7 @@ const Home: React.FC = () => {
                     ))}
                   </div>
                   <motion.h2 
-                    className="text-5xl md:text-6xl font-bold mb-6 leading-tight"
+                    className="text-5xl md:text-6xl font-bold mb-6 leading-tight mt-30"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -376,14 +376,14 @@ const Home: React.FC = () => {
                 </motion.div>
 
                 {/* Floating Cards */}
-                <div className="relative h-[400px]">
+                <div className="relative min-h-[400px] px-4 md:px-0 space-y-6 md:space-y-0 mb-20">
                   <motion.div
                     initial={{ opacity: 0, y: 50, x: 20 }}
                     whileInView={{ opacity: 1, y: 0, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                     whileHover={{ y: -5, scale: 1.02 }}
-                    className="absolute top-0 right-0 w-72 bg-black/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/10"
+                    className="relative md:absolute md:top-0 md:right-0 w-full md:w-72 bg-black/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 shadow-2xl border border-white/10"
                   >
                     <div className="absolute -top-3 -left-3 w-12 h-12 bg-blue-500/20 backdrop-blur-md rounded-lg border border-white/10" />
                     <h3 className="text-white text-2xl font-semibold mb-4">Smart Curation</h3>
@@ -392,17 +392,20 @@ const Home: React.FC = () => {
                     </p>
                   </motion.div>
 
+                  {/* Endless Possibilities Card */}
                   <motion.div
                     initial={{ opacity: 0, y: 50, x: -20 }}
                     whileInView={{ opacity: 1, y: 0, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                     whileHover={{ y: -5, scale: 1.02 }}
-                    className="absolute bottom-0 left-0 w-72 bg-black/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/10 mb-10"
+                    className="relative md:absolute md:bottom-0 md:left-0 w-full md:w-72 bg-black/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 shadow-2xl border border-white/10 md:mb-10"
                   >
                     <div className="absolute -bottom-3 -right-3 w-12 h-12 bg-purple-500/20 backdrop-blur-md rounded-lg border border-white/10" />
-                    <h3 className="text-white text-2xl font-semibold mb-4">Endless Possibilities</h3>
-                    <p className="text-white/90 text-lg">
+                    <h3 className="text-white text-xl md:text-2xl font-semibold mb-3 md:mb-4">
+                      Endless Possibilities
+                    </h3>
+                    <p className="text-white/90 text-base md:text-lg">
                       Unlimited style combinations at your fingertips
                     </p>
                   </motion.div>
